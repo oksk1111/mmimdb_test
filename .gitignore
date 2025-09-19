@@ -26,6 +26,8 @@ MANIFEST
 *.pt
 checkpoints/
 best_model_*.pth
+model_*.pth
+saved_models/
 
 # Virtual Environment
 mmimdb_env/
@@ -35,6 +37,7 @@ ENV/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+*.ipynb_checkpoints
 
 # Dataset and Data files
 data/
@@ -47,8 +50,30 @@ dataset/
 *.pkl
 *.pickle
 
-# Images and Media
+# Experimental Results
+results/
+logs/
+experiments/
+plots/
+figures/
+*.png
 *.jpg
+*.jpeg
+*.svg
+*.pdf
+
+# Temporary files
+temp/
+tmp/
+cache/
+.cache/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 *.jpeg
 *.png
 *.gif
