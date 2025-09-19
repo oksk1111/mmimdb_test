@@ -1,0 +1,82 @@
+# 📑 논문 계획서 요약
+
+## 1. 연구 개요
+- **주제:** 멀티모달 융합 기반 영화 장르 예측 모델 개발  
+- **데이터셋:** MM-IMDb (25,000편 영화, 포스터 이미지 + 줄거리 텍스트 + 23개 멀티라벨 장르)  
+- **기여점:** Cross-Attention 기반 융합 모델 제안 → 이미지·텍스트 간 상호작용을 정교하게 반영  
+- **비교 대상:** Early Fusion, Late Fusion, Attention Fusion + 단일모달(BERT, ViT, ResNet50) + 객체탐지(YOLO, Faster R-CNN)  
+- **설명가능성 확보:** Grad-CAM, Attention map 활용  
+
+---
+
+## 2. 연구 방법론 (제3장 요약)
+### 📌 데이터셋
+- **MM-IMDb**: 영화 약 25,000편  
+- 데이터 구성: `학습 70% / 검증 15% / 테스트 15%`  
+
+### 📌 전처리
+- **이미지:** 224×224 리사이즈, 정규화, 데이터 증강(랜덤 크롭·좌우 반전·색상 변화)  
+- **텍스트:** 소문자 변환, 불용어/특수문자 제거 → BERT 토크나이저 (최대 512 토큰, 패딩/잘림 적용)  
+
+### 📌 모달리티별 특징 추출
+- **이미지:** ResNet50(지역 특징), Vision Transformer(전역 특징)  
+- **텍스트:** BERT, RoBERTa  
+- **보조 특징:** 객체 탐지(YOLO → 속도, Faster R-CNN → 정확도) → 포스터 내 인물·무기·배경 요소 추출  
+
+### 📌 융합 전략
+- **Early Fusion:** 단순 벡터 병합  
+- **Late Fusion:** 모달별 독립 학습 → 결과 결합  
+- **Attention Fusion:** 모달리티 중요도 가중치 반영  
+- **Cross-Attention Fusion(제안):** 텍스트 토큰 ↔ 이미지 패치가 Query/Key/Value 정보를 교차 학습  
+
+### 📌 학습 및 평가
+- **프레임워크:** PyTorch + GPU  
+- **Optimizer:** AdamW + Learning rate warm-up  
+- **Loss 함수:** Binary Cross-Entropy with Logits (멀티라벨 분류)  
+- **평가지표:** Accuracy, Precision, Recall, F1-score, ROC-AUC, mAP  
+
+### 📌 설명가능성 (XAI)
+- **Grad-CAM:** 포스터에서 장르 예측에 기여한 영역 강조  
+- **Attention Map:** 줄거리 텍스트 내 중요한 단어를 시각화  
+
+---
+
+## 3. 실험 설계 (제4장 요약)
+
+### 📌 실험 목적
+- Cross-Attention 기반 융합 모델이 기존 방식 대비 **성능 및 해석 가능성 향상** 여부 검증  
+
+### 📌 비교 모델군
+1. **텍스트 단일 모달:** BERT, RoBERTa  
+2. **이미지 단일 모달:** ResNet50, ViT  
+3. **객체 탐지 기반:** YOLO, Faster R-CNN (포스터 객체 특징 활용)  
+4. **기존 멀티모달 융합:** Early Fusion, Late Fusion, Attention Fusion  
+5. **제안 모델:** Cross-Attention Fusion  
+
+### 📌 실험 절차
+1. **데이터 로딩 및 전처리**
+   - 이미지: 리사이즈·정규화·증강  
+   - 텍스트: BERT 토크나이징, padding & truncation 적용  
+2. **특징 추출**
+   - 이미지: ResNet50, ViT, YOLO, Faster R-CNN  
+   - 텍스트: BERT, RoBERTa  
+3. **융합 단계**
+   - 4가지 전략 비교 (Early, Late, Attention, Cross-Attention)  
+4. **분류**
+   - Fully Connected Layer → 23개 장르 멀티라벨 분류  
+   - Loss: BCE with Logits  
+5. **평가**
+   - 지표: Accuracy, Precision, Recall, F1-score, ROC-AUC, mAP  
+   - 분석: Grad-CAM + Attention Map  
+
+---
+
+# ✅ 핵심 요약 포인트 (AI 모델 구현 필수 정보)
+- **데이터셋:** MM-IMDb (멀티라벨)  
+- **모달리티:** 포스터 이미지(ResNet, ViT, 객체탐지) + 줄거리 텍스트(BERT, RoBERTa)  
+- **융합 방식:** Early, Late, Attention, Cross-Attention(제안)  
+- **손실 함수:** BCE with Logits  
+- **Optimizer:** AdamW + learning rate warm-up  
+- **평가 지표:** Accuracy, Precision, Recall, F1, ROC-AUC, mAP  
+- **XAI 적용:** Grad-CAM, Attention Map  
+
