@@ -73,7 +73,7 @@
 
 # ✅ 핵심 요약 포인트 (AI 모델 구현 필수 정보)
 - **데이터셋:** MM-IMDb (멀티라벨)  
-- **모달리티:** 포스터 이미지(ResNet, ViT, 객체탐지) + 줄거리 텍스트(BERT, RoBERTa)  
+- **모달리티:** 포스터 이미지(ResNet, ViT, YOLO, Faster R-CNN) + 줄거리 텍스트(BERT, RoBERTa)  
 - **융합 방식:** Early, Late, Attention, Cross-Attention(제안)  
 - **손실 함수:** BCE with Logits  
 - **Optimizer:** AdamW + learning rate warm-up  
