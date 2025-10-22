@@ -17,7 +17,7 @@ MM-IMDb 데이터셋을 활용한 멀티모달 융합 기반 영화 장르 예�
 3. **객체 탐지 기반**: YOLO Feature Extractor, Faster R-CNN Feature Extractor
 4. **멀티모달 융합**: Early Fusion, Late Fusion, Attention Fusion
 5. **제안 모델**: Cross-Attention Fusion
-6. **고급 융합**: Object Detection Fusion (객체 탐지 특징 통합)
+6. **고급 융합**: Object Detection Fusion (객체 탐지 특징 통합), GMU (Gated Multimodal Unit)
 
 ### 평가 지표
 - Accuracy, Precision, Recall, F1-score, ROC-AUC, mAP
@@ -157,6 +157,7 @@ mmimdb_test/
 - **Late Fusion**: 예측 결과 결합  
 - **Attention Fusion**: 어텐션 가중치 적용
 - **Cross-Attention Fusion**: 모달리티 간 교차 어텐션 (제안)
+- **GMU (Gated Multimodal Unit)**: 게이트 메커니즘으로 모달리티 간 정보 흐름 제어
 
 ### 학습 설정
 - **손실 함수**: Binary Cross-Entropy with Logits
@@ -182,18 +183,20 @@ mmimdb_test/
 - **Attention Fusion**: 어텐션 메커니즘으로 모달리티별 중요도 계산
 - **Cross-Attention Fusion** (제안): 모달리티 간 교차 어텐션으로 상호작용 학습
 - **Object Detection Fusion**: 객체 탐지 특징을 포함한 고급 멀티모달 융합
+- **GMU (Gated Multimodal Unit)**: 게이트 메커니즘으로 모달리티 간 정보 흐름을 적응적으로 제어
 
 ## 📈 기대 성능
 
 ### 예상 성능 순서 (Macro F1-Score 기준)
 1. **Cross-Attention Fusion** (제안 모델): 0.75+
-2. **Object Detection Fusion**: 0.72+
-3. **Attention Fusion**: 0.70+
-4. **Late Fusion**: 0.68+
-5. **Early Fusion**: 0.66+
-6. **BERT/RoBERTa** (텍스트 단일): 0.65+
-7. **ResNet50/ViT** (이미지 단일): 0.55+
-8. **YOLO/Faster R-CNN** (객체 탐지): 0.58+
+2. **GMU (Gated Multimodal Unit)**: 0.73+
+3. **Object Detection Fusion**: 0.72+
+4. **Attention Fusion**: 0.70+
+5. **Late Fusion**: 0.68+
+6. **Early Fusion**: 0.66+
+7. **BERT/RoBERTa** (텍스트 단일): 0.65+
+8. **ResNet50/ViT** (이미지 단일): 0.55+
+9. **YOLO/Faster R-CNN** (객체 탐지): 0.58+
 
 ## 🔧 기술적 특징
 
@@ -216,6 +219,7 @@ mmimdb_test/
 
 ## 🏆 기여점
 - Cross-Attention 기반 멀티모달 융합 방법론 제안
+- GMU(Gated Multimodal Unit) 기반 적응적 모달리티 융합 구현
 - MM-IMDb 데이터셋에서의 체계적인 모델 비교 분석
 - 설명가능한 AI 관점에서의 모델 해석 제공
 - 객체 탐지 특징을 활용한 고급 멀티모달 융합 모델 구현
